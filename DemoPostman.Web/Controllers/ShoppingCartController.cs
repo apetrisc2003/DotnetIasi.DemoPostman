@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoPostman.Web.Controllers
 {
+    [Route("api/[controller]")]
     public class ShoppingCartController : ControllerBase
     {
         public readonly IShoppingCartService shoppingCartService;

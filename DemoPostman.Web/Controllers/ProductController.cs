@@ -1,5 +1,4 @@
 ﻿using DemoPostman.Interfaces;
-using DemoPostman.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoPostman.Controllers

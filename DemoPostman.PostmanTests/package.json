@@ -1,0 +1,19 @@
+{
+  "name": "hellocicd.newmantests",
+  "version": "1.0.0",
+  "description": "Postman collection tests with Newman",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.levi9.com/a.diaconu/HelloCICD.Backend"
+  },
+  "author": "LeviNine",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^3.9.3",
+    "newman-reporter-teamcity": "^0.1.10"
+  }
+}
