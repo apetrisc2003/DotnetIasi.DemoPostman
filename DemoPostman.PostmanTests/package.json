@@ -13,7 +13,7 @@
   "author": "LeviNine",
   "license": "ISC",
   "dependencies": {
-    "newman": "^3.9.3",
+    "newman": "^3.10.0",
     "newman-reporter-teamcity": "^0.1.10"
   }
 }
