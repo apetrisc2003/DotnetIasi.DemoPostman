@@ -155,7 +155,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0466f1ed-635c-43c7-99d2-b62a558f413e",
+						"id": "2d374dba-3d1b-4edb-89e9-07157a7692cb",
 						"type": "text/javascript",
 						"exec": [
 							"//reset SelectedProduct variable at the end of the flow",
@@ -167,6 +167,7 @@
 							"//Tests",
 							"var parsedResponse = JSON.parse(responseBody);",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
 							"tests[\"Total is correct\"] = parsedResponse.totalPrice === 25.99"
 						]
 					}
