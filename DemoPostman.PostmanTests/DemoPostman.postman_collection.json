@@ -54,12 +54,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:44376/api/product/{{ProductId}}",
-					"protocol": "https",
+					"raw": "{{endpoint}}/api/product/{{ProductId}}",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "44376",
 					"path": [
 						"api",
 						"product",
@@ -117,12 +115,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:44376/api/product/{{ProductId}}",
-					"protocol": "https",
+					"raw": "{{endpoint}}/api/product/{{ProductId}}",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "44376",
 					"path": [
 						"api",
 						"product",
@@ -189,12 +185,10 @@
 					"raw": "{\n\t\"CartId\" : \"{{CartId}}\",\n\t\"CartProducts\" : {{SelectedProducts}}\n}"
 				},
 				"url": {
-					"raw": "https://localhost:44376/api/ShoppingCart/",
-					"protocol": "https",
+					"raw": "{{endpoint}}/api/ShoppingCart/",
 					"host": [
-						"localhost"
+						"{{endpoint}}"
 					],
-					"port": "44376",
 					"path": [
 						"api",
 						"ShoppingCart",
