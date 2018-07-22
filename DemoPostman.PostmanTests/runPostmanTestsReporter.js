@@ -12,8 +12,7 @@ newman.run({
 		]
 	},
 	environment: 'DemoPostman.postman_environment.json',
-	reporters: ['teamcity'],
-	}
+	reporters: ['teamcity']
 },
 	function (err, summary) {
 	if (err) {
