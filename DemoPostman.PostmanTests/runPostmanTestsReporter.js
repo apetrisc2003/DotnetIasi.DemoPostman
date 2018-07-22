@@ -12,12 +12,8 @@ newman.run({
 		]
 	},
 	environment: 'DemoPostman.postman_environment.json',
-	// reporters: 'myreporter',
-	// reporter: {
-		// myreporter: {
-			// 'option-name': 'option-value' //thisisoptional
-		// }
-	// }
+	reporters: ['teamcity'],
+	}
 },
 	function (err, summary) {
 	if (err) {
