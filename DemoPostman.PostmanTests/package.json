@@ -14,6 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "newman": "^3.10.0",
-    "newman-reporter-teamcity": "^0.1.10"
+    "newman-reporter-teamcity": "^0.1.11"
   }
 }

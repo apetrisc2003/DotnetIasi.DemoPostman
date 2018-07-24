@@ -36,7 +36,7 @@
 							"//Tests",
 							"var parsedResponse = JSON.parse(responseBody);",
 							"var productId = postman.getEnvironmentVariable(\"ProductId\");",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"Status code is 200\"] = responseCode.code === 2000;",
 							"tests[\"Product name is correct\"] = parsedResponse.name === \"Prod\" + productId;",
 							"tests[\"Product description is correct\"] = parsedResponse.description === \"Prod\" + productId;",
 							"//Tests",

@@ -25,7 +25,7 @@ namespace DemoPostman.Services
                     product = new Product { Id = 1, Name = "Prod1", Description = "Prod1", Price = 10M };
                     break;
                 case 2:
-                    product = new Product { Id = 2, Name = "Prod2", Description = "Prod2", Price = 15.99M };
+                    product = new Product { Id = 2, Name = "Prod2", Description = "Prod2", Price = 15M };
                     break;
                 case 3:
                     product = new Product { Id = 3, Name = "Prod3", Description = "Prod3", Price = 5M };

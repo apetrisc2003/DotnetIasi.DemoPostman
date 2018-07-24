@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "5734ad88-beeb-4cbc-a4fc-b0a547e6def6",
+		"name": "demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get First Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afb95083-c8db-4ace-b1b8-e7d0a073bb5e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var productPrice = parseFloat(jsonData.price);",
+							"var totalPrice = parseFloat(pm.environment.get(\"TotalPrice\"));",
+							"var newPrice = productPrice + totalPrice;",
+							"",
+							"pm.environment.set(\"TotalPrice\", newPrice);",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Product name is coorect\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Prod1\");",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:52612/api/product/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52612",
+					"path": [
+						"api",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Second Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "500f217c-8f7a-4c8f-a30d-bc3220783dce",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var productPrice = parseFloat(jsonData.price);",
+							"var totalPrice = parseFloat(pm.environment.get(\"TotalPrice\"));",
+							"var newPrice = productPrice + totalPrice;",
+							"",
+							"pm.environment.set(\"TotalPrice\", newPrice);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Product name is coorect\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Prod2\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:52612/api/product/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52612",
+					"path": [
+						"api",
+						"product",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505c6ed5-0997-4096-8ccd-702f024ef211",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"var expectedPrice = parseFloat(pm.environment.get(\"TotalPrice\"));",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"total price is correct\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.totalPrice).to.eql(expectedPrice);",
+							"});",
+							"",
+							"pm.test(\"rebate value is correct\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.rebateValue).to.eql(2.5);",
+							"});",
+							"",
+							"",
+							"pm.environment.set(\"TotalPrice\", 0);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CartId\" : \"MyId\",\n\t\"CartProducts\":[1,2]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:52612/api/shoppingcart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "52612",
+					"path": [
+						"api",
+						"shoppingcart"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
