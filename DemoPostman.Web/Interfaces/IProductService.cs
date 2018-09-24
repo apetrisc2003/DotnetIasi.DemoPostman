@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DemoPostman.Models;
 
-namespace DemoPostman.Interfaces
+namespace DemoPostman.Web.Interfaces
 {
     public interface IProductService
     {

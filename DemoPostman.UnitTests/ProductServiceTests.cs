@@ -1,5 +1,5 @@
 using DemoPostman.Models;
-using DemoPostman.Services;
+using DemoPostman.Web.Services;
 using Xunit;
 
 namespace DemoPostman.UnitTests

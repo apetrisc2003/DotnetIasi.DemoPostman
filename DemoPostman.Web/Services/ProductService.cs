@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DemoPostman.Interfaces;
 using DemoPostman.Models;
+using DemoPostman.Web.Interfaces;
 
-namespace DemoPostman.Services
+namespace DemoPostman.Web.Services
 {
     public class ProductService : IProductService
     {

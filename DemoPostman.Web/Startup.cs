@@ -1,12 +1,13 @@
 ﻿using DemoPostman.Interfaces;
-using DemoPostman.Services;
+using DemoPostman.Web.Interfaces;
+using DemoPostman.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DemoPostman
+namespace DemoPostman.Web
 {
     public class Startup
     {

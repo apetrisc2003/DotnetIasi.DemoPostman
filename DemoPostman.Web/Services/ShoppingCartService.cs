@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DemoPostman.Interfaces;
 using DemoPostman.Models;
+using DemoPostman.Web.Interfaces;
 
-namespace DemoPostman.Services
+namespace DemoPostman.Web.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
@@ -13,6 +13,7 @@ namespace DemoPostman.Services
         {
             this.productService = productService;
         }
+
         public PriceDetails GetShoppingCartDetails(ShoppingCart shoppingCart)
         {
             var selectedProducts = shoppingCart.CartProducts.Select(id => productService.GetProductDetails(id)).ToList();

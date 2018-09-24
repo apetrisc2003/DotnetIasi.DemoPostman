@@ -1,16 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DemoPostman.Models;
-using DemoPostman.Services;
+using DemoPostman.Web.Interfaces;
+using DemoPostman.Web.Services;
+using Moq;
 using Xunit;
 
 namespace DemoPostman.UnitTests
 {
-    public class ShoppingcartServiceTests
+    public class ShoppingCartServiceTests
     {
-        private readonly ShoppingCartService shoppingCartService = new ShoppingCartService();
+        private Mock<IProductService> mockProductService;
+        private ShoppingCartService shoppingCartService;
 
+        public ShoppingCartServiceTests()
+        {
+            mockProductService = new Mock<IProductService>();
+            shoppingCartService = new ShoppingCartService(mockProductService.Object);
+        }
 
-        private readonly PriceDetails expectedPriceDetails = new PriceDetails()
+        private readonly PriceDetails expectedPriceDetails = new PriceDetails
         {
             SelectedProducts = new List<Product>()
             {
@@ -22,18 +31,23 @@ namespace DemoPostman.UnitTests
             TotalPrice = 25.99M
         };
 
+
+
         [Fact]
         public void GetShoppingCartDetails_ValidRequest_ShouldNotApplyRebate()
         {
             var shoppingCart = new ShoppingCart
             {
                 CartId = "0000-0000-0000-0000",
-                CartProducts = new List<Product>
-                {
-                  new Product { Name = "Prod1", Description = "Prod1", Price = 2M },
-                  new Product { Name = "Prod2", Description = "Prod2", Price = 3M }
-                }
+                CartProducts = new List<int> { 1, 2 }
             };
+
+            mockProductService
+                .Setup(service => service.GetProductDetails(1))
+                .Returns(new Product{Name = "Prod1", Description = "Prod1", Price = 5M});
+            mockProductService
+                .Setup(service => service.GetProductDetails(2))
+                .Returns(new Product { Name = "Prod2", Description = "Prod2", Price = 10.99M });
 
             var totalResult = shoppingCartService.GetShoppingCartDetails(shoppingCart);
 
@@ -47,12 +61,14 @@ namespace DemoPostman.UnitTests
             var shoppingCart = new ShoppingCart
             {
                 CartId = "0000-0000-0000-0000",
-                CartProducts = new List<Product>
-                {
-                  new Product { Name = "Prod1", Description = "Prod1", Price = 10M },
-                  new Product { Name = "Prod2", Description = "Prod2", Price = 15.99M }
-                }
+                CartProducts = new List<int>{1,2}
             };
+            mockProductService
+                .Setup(service => service.GetProductDetails(1))
+                .Returns(new Product { Name = "Prod1", Description = "Prod1", Price = 10M });
+            mockProductService
+                .Setup(service => service.GetProductDetails(2))
+                .Returns(new Product { Name = "Prod2", Description = "Prod2", Price = 15.99M });
 
             var totalResult = shoppingCartService.GetShoppingCartDetails(shoppingCart);
 
