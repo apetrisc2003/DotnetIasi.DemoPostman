@@ -1,7 +1,7 @@
 var newman = require('newman');
 var endpoint = process.argv[2];
 newman.run({
-	collection: 'DemoPostman_Script.postman_collection.json',
+	collection: 'live.postman_collection.json',
 	globals: {
 		"values": [{
 				"key": "endpoint",
@@ -11,7 +11,7 @@ newman.run({
 			}
 		]
 	},
-	environment: 'DemoPostman.postman_environment.json',
+	environment: 'live.postman_environment.json',
 	reporters: 'teamcity'
 },
 	function (err, summary) {
