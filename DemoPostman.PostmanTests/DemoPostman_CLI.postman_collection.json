@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "e6ab8cc5-4c44-4f28-baae-056314383522",
+		"name": "DemoPostman_CLI",
+		"description": "Test collection for Postman tests in CI/CD pipelines talk\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get First Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a83ab058-7058-4f0b-ab18-ee17e7bdc871",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setEnvironmentVariable(\"ProductId\", 1);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "32fcefe0-33bb-4eb9-af8b-51a067c3e7e4",
+						"type": "text/javascript",
+						"exec": [
+							"// Post-Requests scripts",
+							"var productList = JSON.parse(postman.getEnvironmentVariable(\"SelectedProducts\"));",
+							"",
+							"productList.push(JSON.parse(responseBody));",
+							"",
+							"postman.setEnvironmentVariable(\"SelectedProducts\", JSON.stringify(productList));",
+							"// Post-Requests scripts",
+							"",
+							"//Tests",
+							"var parsedResponse = JSON.parse(responseBody);",
+							"var productId = postman.getEnvironmentVariable(\"ProductId\");",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"Product name is correct\"] = parsedResponse.name === \"Prod\" + productId;",
+							"tests[\"Product description is correct\"] = parsedResponse.description === \"Prod\" + productId;",
+							"//Tests",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost/demo/api/product/{{ProductId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"demo",
+						"api",
+						"product",
+						"{{ProductId}}"
+					]
+				},
+				"description": "Get the product with Id = 1 from the Get endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Second Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e0cb0229-5528-4e65-9941-4b7dece495bd",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setEnvironmentVariable(\"ProductId\", 2);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b194157f-28df-4473-944b-b994422c452f",
+						"type": "text/javascript",
+						"exec": [
+							"// Post-Requests scripts",
+							"var productList = JSON.parse(postman.getEnvironmentVariable(\"SelectedProducts\"));",
+							"",
+							"productList.push(JSON.parse(responseBody));",
+							"",
+							"postman.setEnvironmentVariable(\"SelectedProducts\", JSON.stringify(productList));",
+							"// Post-Requests scripts",
+							"",
+							"//Tests",
+							"var parsedResponse = JSON.parse(responseBody);",
+							"var productId = postman.getEnvironmentVariable(\"ProductId\");",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"Product name is correct\"] = parsedResponse.name === \"Prod\" + productId;",
+							"tests[\"Product description is correct\"] = parsedResponse.description === \"Prod\" + productId;",
+							"//Tests",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost/demo/api/product/{{ProductId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"demo",
+						"api",
+						"product",
+						"{{ProductId}}"
+					]
+				},
+				"description": "Get the product with Id = 1 from the Get endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Total Price",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "687dae88-8533-4e80-9fe3-8cdd58e4d261",
+						"type": "text/javascript",
+						"exec": [
+							"var guid = createGuid();",
+							"postman.setEnvironmentVariable(\"CartId\", guid);",
+							"",
+							"",
+							"function createGuid()",
+							"{",
+							"    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {",
+							"        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);",
+							"        return v.toString(16);",
+							"    });",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d374dba-3d1b-4edb-89e9-07157a7692cb",
+						"type": "text/javascript",
+						"exec": [
+							"//reset SelectedProduct variable at the end of the flow",
+							"postman.setEnvironmentVariable(\"SelectedProducts\", \"[]\");",
+							"",
+							"//reset Guid variable at the end of the flow",
+							"postman.setEnvironmentVariable(\"CartId\", \"0000-0000-0000\");",
+							"",
+							"//Tests",
+							"var parsedResponse = JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Total is correct\"] = parsedResponse.totalPrice === 25.99"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CartId\" : \"{{CartId}}\",\n\t\"CartProducts\" : {{SelectedProducts}}\n}"
+				},
+				"url": {
+					"raw": "http://localhost/demo/api/ShoppingCart/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"demo",
+						"api",
+						"ShoppingCart",
+						""
+					]
+				},
+				"description": "Submit the above products in get back the total price with or without rebate"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3424b0c4-1475-475d-bc03-2a395df4818a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "797e0d29-a4b0-436a-b84a-fa7538e585c2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
